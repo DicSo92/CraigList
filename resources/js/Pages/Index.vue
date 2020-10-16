@@ -1,6 +1,6 @@
 <template>
     <app-layout>
-        <h1>Lorem Ipsum</h1>
+        <h1>Main Index</h1>
     </app-layout>
 </template>
 
