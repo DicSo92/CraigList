@@ -1,7 +1,7 @@
 [
     {
         "category_id" : 1,
-        "sub_category" : [
+        "sub_categories" : [
             "Animaux,",
             "Activités",
             "Artistes",
@@ -22,7 +22,7 @@
     },
     {
         "category_id" : 2,
-        "sub_category": [
+        "sub_categories": [
             "Apts / Immob",
             "Bureaux / Commerces",
             "Chbres / Colloc",
@@ -73,7 +73,7 @@
     },
     {
         "category_id" : 4 ,
-        "sub_category": [
+        "sub_categories": [
             "Animaux",
             "Annces.PE",
             "Auto",
@@ -161,8 +161,7 @@
     },
     {
         "category_id" : 7,
-        "sub_category": [
-
+        "sub_categories": [
             "Aide",
             "Aliment.",
             "Amour",
