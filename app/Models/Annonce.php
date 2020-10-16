@@ -9,6 +9,10 @@ class Annonce extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'images' => 'array',
+    ];
+
     public function department()
     {
         return $this->belongsTo(Department::class);
