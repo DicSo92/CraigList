@@ -3,7 +3,9 @@
         <div class="container mx-auto flex justify-center py-4">
             <div class="w-full grid grid-cols-12 gap-4">
                 <div class="col-span-3 bg-gray-200 text-yyy">tfdgsdfgesrfd</div>
-                <div class="col-span-7 bg-blue-500"></div>
+                <div class="col-span-7 bg-blue-500">
+                    <h1>{{test}}</h1>
+                </div>
                 <div class="col-span-2 bg-gray-200 flex flex-col items-center p-3">
                     <select class="block w-full bg-white border border-gray-400 hover:border-gray-500 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                         <option>Français</option>
@@ -30,13 +32,18 @@
             'departments',
             'categories'
         ],
+        components: {
+            AppLayout
+        },
         data() {
             return {
                 // departments: this.departments
             }
         },
-        components: {
-            AppLayout
+        computed: {
+            test () {
+                return this.$store.state.categories.test
+            },
         },
     }
 </script>
