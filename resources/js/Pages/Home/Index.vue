@@ -26,6 +26,7 @@
     import MainRight from './Right/Main'
 
     export default {
+        name: 'Home',
         props: [
             'departments',
             'categories'

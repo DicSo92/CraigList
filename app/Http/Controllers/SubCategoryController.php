@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class SubCategoryController extends Controller
 {
@@ -41,12 +42,17 @@ class SubCategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\SubCategory  $subCategory
-     * @return \Illuminate\Http\Response
+     * @param \App\Models\SubCategory $subCategory
+     * @param                         $subCategorySlug
+     * @param                         $categorySlug
+     *
+     * @return \Inertia\Response
      */
-    public function show(SubCategory $subCategory)
+    public function show(SubCategory $subCategory, $categorySlug, $subCategorySlug)
     {
-        //
+        return Inertia::render('AdList/Index', [
+            "sub_category" => $subCategory->where('slug', $subCategorySlug)->with('annonces')->first()
+        ]);
     }
 
     /**

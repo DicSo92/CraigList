@@ -5,7 +5,10 @@
             <div v-for="part in spliceSubCategories(category).sub_categories"
                  :class="'col-span-' + spliceSubCategories(category).sizeCol" >
                 <div class="flex flex-col">
-                    <div v-for="subCategory in part" class="text-blue-700 font-bold text-xs hover:underline cursor-pointer border-b border-gray-200">{{ subCategory.title }}</div>
+                    <inertia-link v-for="subCategory in part"
+                                  :href="route('SubCategory.show', [category.slug, subCategory.slug])" :key="subCategory.id">
+                        <div class="text-blue-700 font-bold text-xs hover:underline cursor-pointer border-b border-gray-200">{{ subCategory.title }}</div>
+                    </inertia-link>
                 </div>
             </div>
         </div>

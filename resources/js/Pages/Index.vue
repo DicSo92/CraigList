@@ -1,6 +1,5 @@
 <template>
     <app-layout>
-        <h1>Main Index</h1>
     </app-layout>
 </template>
 
