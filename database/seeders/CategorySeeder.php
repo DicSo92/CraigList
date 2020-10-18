@@ -17,6 +17,8 @@ class CategorySeeder extends Seeder
     {
         $categories = array('Communauté', 'Immobilier', 'Emploi', 'Services', 'A vendre', 'Petits boulots', 'Forums de discussion');
 
+        $categories = array('Communauté', 'Services', 'Forums de discussion', 'Immobilier', 'A vendre', 'Emploi', 'Petits boulots', );
+
         foreach ($categories as $categorie) {
             $slug = Str::slug($categorie, '-');
 
