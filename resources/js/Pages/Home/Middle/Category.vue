@@ -5,7 +5,7 @@
             <div v-for="part in spliceSubCategories(category).sub_categories"
                  :class="'col-span-' + spliceSubCategories(category).sizeCol" >
                 <div class="flex flex-col">
-                    <div v-for="subCategory in part" class="text-blue-700 text-xs hover:underline cursor-pointer border-b border-gray-200">{{ subCategory.title }}</div>
+                    <div v-for="subCategory in part" class="text-blue-700 font-bold text-xs hover:underline cursor-pointer border-b border-gray-200">{{ subCategory.title }}</div>
                 </div>
             </div>
         </div>
