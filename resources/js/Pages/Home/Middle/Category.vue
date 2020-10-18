@@ -48,8 +48,5 @@
 </script>
 
 <style scoped>
-    .borderY {
-        border-bottom: 1px solid #d7d7d7;
-        border-top: 1px solid #d7d7d7;
-    }
+
 </style>
