@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia\Inertia::render('Dashboard');
@@ -26,7 +26,7 @@ Route::group(['auth:sanctum', 'verified'], function () {
 });
 
 
-Route::get('/home', \App\Http\Controllers\HomeController::class)->name('home');
+Route::get('/', \App\Http\Controllers\HomeController::class)->name('home');
 
 
 Route::get('/{categorySlug}/{subCategorySlug}', '\App\Http\Controllers\SubCategoryController@show')->name('SubCategory.show');
