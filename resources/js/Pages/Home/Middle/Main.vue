@@ -27,7 +27,7 @@
 
 
     export default {
-        name: "Main",
+        name: "MainMiddle",
         props: [
             'categories'
         ],

@@ -11,7 +11,7 @@
 
                     <h1>{{test}}</h1>
                 </div>
-                <div class="col-span-2 bg-gray-200 flex flex-col items-center p-3 borderX">
+                <div class="col-span-2 bg-gray-200 p-3 borderX">
                     <MainRight :departments="departments"></MainRight>
                 </div>
             </div>
