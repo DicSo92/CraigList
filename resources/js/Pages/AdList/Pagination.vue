@@ -16,12 +16,8 @@
         </paginate>
         <div class="flex items-center ml-6">
             <p>Per page :</p>
-            <select
-                class="block ml-1 bg-transparent border border-gray-400 hover:border-gray-500 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                <option>10</option>
-                <option>20</option>
-                <option>30</option>
-                <option>50</option>
+            <select v-model="selectedOption" class="block ml-1 bg-transparent border border-gray-400 hover:border-gray-500 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                <option v-for="option in selectOptions" :value="option">{{option}}</option>
             </select>
         </div>
     </div>
@@ -37,6 +33,8 @@
         },
         data() {
             return {
+                selectedOption: 15,
+                selectOptions: [10, 15, 20, 30, 50],
                 page: 1
             }
         },
