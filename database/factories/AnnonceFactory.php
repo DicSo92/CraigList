@@ -29,7 +29,8 @@ class AnnonceFactory extends Factory
         $images = array();
         if ($rand !== 0) {
             for ($i = 0; $i <= $rand; $i++) {
-                array_push($images, 'https://loremflickr.com/400/400/');
+//                array_push($images, 'https://loremflickr.com/400/400?random=' . $this->faker->randomNumber($nbDigits = NULL, $strict = false));
+                array_push($images, 'https://picsum.photos/300/200?random=' . $this->faker->randomNumber($nbDigits = NULL, $strict = false));
             }
         } else {
             $images = null;
@@ -40,8 +41,8 @@ class AnnonceFactory extends Factory
             'slug' => $slug,
             'description' => $this->faker->paragraph($this->faker->numberBetween(1, 3)),
             'images' => $images,
-            'department_id' => $this->faker->numberBetween(1, 98),
-            'subCategory_id' => $this->faker->numberBetween(1, 106),
+            'department_id' => $this->faker->numberBetween(1, 106),
+            'sub_category_id' => $this->faker->numberBetween(1, 183),
         ];
     }
 }

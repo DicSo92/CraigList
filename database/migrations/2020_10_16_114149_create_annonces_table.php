@@ -20,7 +20,7 @@ class CreateAnnoncesTable extends Migration
             $table->longText('description');
             $table->json('images')->nullable()->default(null);
             $table->foreignId('department_id')->constrained();
-            $table->foreignId('subCategory_id')->constrained();
+            $table->foreignId('sub_category_id')->constrained();
             $table->timestamps();
         });
     }
