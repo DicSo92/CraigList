@@ -8,8 +8,6 @@
 
                 <div class="col-span-7">
                     <MainMiddle :categories="categories"></MainMiddle>
-
-                    <h1>{{test}}</h1>
                 </div>
                 <div class="col-span-2 bg-gray-200 p-3 borderX">
                     <MainRight :departments="departments"></MainRight>
@@ -40,10 +38,7 @@
         data() {
             return {}
         },
-        computed: {
-            test() {
-                return this.$store.state.categories.test
-            },
+        created() {
         },
         methods: {}
     }

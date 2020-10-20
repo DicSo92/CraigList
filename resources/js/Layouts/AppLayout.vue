@@ -20,7 +20,7 @@
                         </div>
 
                         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                            <jet-nav-link :href="route('home')" :active="$page.currentRouteName == 'home'">
+                            <jet-nav-link :href="route('home', {departmentSlug: this.$store.state.departments.current_department.slug})" :active="$page.currentRouteName == 'home'">
                                 Home
                             </jet-nav-link>
                         </div>
