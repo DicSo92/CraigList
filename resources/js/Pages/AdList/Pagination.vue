@@ -1,10 +1,10 @@
 <template>
     <div class="pagination flex">
         <paginate
-            v-model="page"
-            :page-count="20"
+            v-model="current_page"
+            :page-count="page_count"
             :margin-pages="0"
-            :click-handler="clickCallback"
+            :click-handler="changePage"
             :first-button-text="'<<'" :last-button-text="'>>'"
             :prev-text="'<'" :next-text="'>'"
             first-last-button no-li-surround
@@ -28,19 +28,43 @@
 
     export default {
         name: "Pagination",
+        props: [
+            'category',
+            'subCategory',
+            'annonces'
+        ],
         components: {
             Paginate
         },
         data() {
             return {
-                selectedOption: 15,
+                selectedOption: this.annonces.per_page,
                 selectOptions: [10, 15, 20, 30, 50],
-                page: 1
+                current_page: this.annonces.current_page,
+                page_count: this.annonces.last_page,
+                total_ads: this.annonces.total
+            }
+        },
+        watch: {
+            selectedOption (newOption, oldOption) {
+                this.changePage(this.current_page)
             }
         },
         methods: {
-            clickCallback(pageNum) {
+            changePage(pageNum) {
                 console.log(pageNum)
+
+                this.$inertia.visit(this.route('Annonce.adsBySubCategory',
+                    {
+                        categorySlug: this.category.slug,
+                        subCategorySlug: this.subCategory.slug,
+                        page: pageNum,
+                        nb: this.selectedOption
+                    },
+                    {
+                        preserveState: true
+                    }
+                ))
             }
         }
     }

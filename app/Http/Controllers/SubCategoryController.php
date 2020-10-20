@@ -42,17 +42,12 @@ class SubCategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\SubCategory $subCategory
-     * @param                         $subCategorySlug
-     * @param                         $categorySlug
+     * @param \Illuminate\Http\Request $request
      *
-     * @return \Inertia\Response
      */
-    public function show(SubCategory $subCategory, $categorySlug, $subCategorySlug)
+    public function show(Request $request)
     {
-        return Inertia::render('AdList/Index', [
-            "sub_category" => $subCategory->where('slug', $subCategorySlug)->with('annonces')->first()
-        ]);
+       //
     }
 
     /**

@@ -41,8 +41,8 @@ class AnnonceFactory extends Factory
             'slug' => $slug,
             'description' => $this->faker->paragraph($this->faker->numberBetween(1, 3)),
             'images' => $images,
-            'department_id' => $this->faker->numberBetween(1, 98),
-            'sub_category_id' => $this->faker->numberBetween(1, 106),
+            'department_id' => $this->faker->numberBetween(1, 106),
+            'sub_category_id' => $this->faker->numberBetween(1, 183),
         ];
     }
 }
