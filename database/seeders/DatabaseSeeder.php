@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(UserSeeder::class);
 
-        Annonce::factory(3000)->create();
+        Annonce::factory(20000)->create();
 
         $this->call(DepartmentSeeder::class);
 

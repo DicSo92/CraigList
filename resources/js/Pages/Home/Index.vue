@@ -27,7 +27,8 @@
         name: 'Home',
         props: [
             'departments',
-            'categories'
+            'categories',
+            'current'
         ],
         components: {
             AppLayout,

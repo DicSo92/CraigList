@@ -6,7 +6,11 @@
                  :class="'col-span-' + spliceSubCategories(category).sizeCol" >
                 <div class="flex flex-col">
                     <inertia-link v-for="subCategory in part"
-                                  :href="route('Annonce.adsBySubCategory', {categorySlug: category.slug, subCategorySlug: subCategory.slug})" :key="subCategory.id">
+                                  :href="route('Annonce.adsBySubCategory', {
+                                      currentDepartmentSlug: $store.state.departments.current_department.slug,
+                                      categorySlug: category.slug,
+                                      subCategorySlug: subCategory.slug})"
+                                  :key="subCategory.id">
                         <div class="text-blue-700 font-bold text-xs hover:underline cursor-pointer border-b border-gray-200">{{ subCategory.title }}</div>
                     </inertia-link>
                 </div>

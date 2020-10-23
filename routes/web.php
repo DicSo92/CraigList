@@ -30,8 +30,10 @@ Route::group(['auth:sanctum', 'verified'], function () {
 
 
 Route::get('/', \App\Http\Controllers\HomeController::class)->name('load');
-Route::get('/{departmentSlug}', \App\Http\Controllers\HomeController::class)->name('home');
+Route::get('/{currentDepartmentSlug}', \App\Http\Controllers\HomeController::class)->name('home');
 
 
 
-Route::get('/{categorySlug}/{subCategorySlug}', '\App\Http\Controllers\AnnonceController@adsBySubCategory')->name('Annonce.adsBySubCategory');
+//Route::get('/{categorySlug}/{subCategorySlug}', '\App\Http\Controllers\AnnonceController@adsBySubCategory')->name('Annonce.adsBySubCategory');
+
+Route::get('/{currentDepartmentSlug}/{categorySlug}/{subCategorySlug}', '\App\Http\Controllers\AnnonceController@adsBySubCategory')->name('Annonce.adsBySubCategory');
