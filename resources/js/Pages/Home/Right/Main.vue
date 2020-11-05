@@ -10,10 +10,14 @@
 
         <h5 class="font-bold my-2 borderY bg-gray-100 w-full text-center">Départements</h5>
         <div class="flex flex-col items-center">
-            <div v-for="department in departments"
-                 class="text-blue-500 text-xs text-center hover:underline cursor-pointer">
-                {{department.name}}
-            </div>
+            <inertia-link v-for="department in departments"
+                          :key="department.id"
+                          :href="route('home', {currentDepartmentSlug: department.slug})"
+                          @click="changeCurrentDepartment(department)">
+                <div class="text-blue-500 text-xs text-center hover:underline cursor-pointer">
+                    {{department.name}}
+                </div>
+            </inertia-link>
         </div>
     </div>
 </template>
@@ -23,7 +27,12 @@
         name: "MainRight",
         props: [
             'departments'
-        ]
+        ],
+        methods: {
+            changeCurrentDepartment(department) {
+                this.$store.commit('departments/changeCurrentDepartment', department)
+            }
+        }
     }
 </script>
 
