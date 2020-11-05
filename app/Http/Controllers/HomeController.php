@@ -18,9 +18,11 @@ class HomeController extends Controller
      *
      * @param \App\Models\Department   $department
      *
+     * @param string                   $currentDepartmentSlug
+     *
      * @return \Inertia\Response
      */
-    public function __invoke(Request $request, Category $category, Department $department, $currentDepartmentSlug)
+    public function __invoke(Request $request, Category $category, Department $department, $currentDepartmentSlug = "hauts-de-seine")
     {
         $current_department = $department->where('slug', $currentDepartmentSlug)->firstOrFail();
 
