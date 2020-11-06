@@ -42,7 +42,8 @@ class AnnonceController extends Controller
         return Inertia::render('AdList/Index', [
             "category" => $category,
             "sub_category" => $subCategory,
-            "annonces" => $ads
+            "annonces" => $ads,
+            "current" => $current_department,
         ]);
     }
 

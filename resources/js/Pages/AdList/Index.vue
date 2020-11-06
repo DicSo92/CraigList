@@ -4,7 +4,8 @@
             <div class="mb-4 w-full flex justify-end">
                 <Pagination :annonces="annonces"
                             :category="category"
-                            :subCategory="sub_category">
+                            :subCategory="sub_category"
+                            :current="current">
                 </Pagination>
             </div>
             <div class="w-full grid grid-cols-10 gap-4">
@@ -27,6 +28,7 @@
             'category',
             'sub_category',
             'annonces',
+            'current'
         ],
         components: {
             AppLayout,

@@ -31,7 +31,8 @@
         props: [
             'category',
             'subCategory',
-            'annonces'
+            'annonces',
+            'current'
         ],
         components: {
             Paginate
@@ -56,6 +57,7 @@
 
                 this.$inertia.visit(this.route('Annonce.adsBySubCategory',
                     {
+                        currentDepartmentSlug: this.current.slug,
                         categorySlug: this.category.slug,
                         subCategorySlug: this.subCategory.slug,
                         page: pageNum,
