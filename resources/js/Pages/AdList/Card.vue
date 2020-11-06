@@ -29,7 +29,7 @@
         <div class="flex-grow flex items-end">
             <div class='flex justify-between items-center text-gray-700 px-5 py-4 w-full'>
                 <div class="text-xs">May 6, 2020</div>
-                <div class="text-sm">Posted by <span class="text-red-400">Admin</span></div>
+                <div class="text-sm">Posted by <span class="text-red-400">{{ annonce.user.name }}</span></div>
             </div>
         </div>
     </div>

@@ -19,6 +19,7 @@ class CreateAnnoncesTable extends Migration
             $table->string('slug');
             $table->longText('description');
             $table->json('images')->nullable()->default(null);
+            $table->foreignId('user_id')->constrained();
             $table->foreignId('department_id')->constrained();
             $table->foreignId('sub_category_id')->constrained();
             $table->timestamps();

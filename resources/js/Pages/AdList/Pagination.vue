@@ -40,7 +40,7 @@
         data() {
             return {
                 selectedOption: this.annonces.per_page,
-                selectOptions: [10, 15, 20, 30, 50],
+                selectOptions: [8, 12, 16, 32, 52],
                 current_page: this.annonces.current_page,
                 page_count: this.annonces.last_page,
                 total_ads: this.annonces.total

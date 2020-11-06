@@ -8,8 +8,8 @@
                             :current="current">
                 </Pagination>
             </div>
-            <div class="w-full grid grid-cols-10 gap-4">
-                <div class="col-span-2" v-for="annonce in annonces.data" :key="annonce.id">
+            <div class="w-full grid grid-cols-12 gap-4">
+                <div class="col-span-3" v-for="annonce in annonces.data" :key="annonce.id">
                     <Card :annonce="annonce"></Card>
                 </div>
             </div>
