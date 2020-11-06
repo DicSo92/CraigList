@@ -7,11 +7,11 @@
                 <div class="flex flex-col">
                     <inertia-link v-for="subCategory in part"
                                   :href="route('Annonce.adsBySubCategory', {
-                                      currentDepartmentSlug: $store.state.departments.current_department.slug,
+                                      currentDepartmentSlug: current.slug,
                                       categorySlug: category.slug,
                                       subCategorySlug: subCategory.slug})"
                                   :key="subCategory.id">
-                        <div class="text-blue-700 font-bold text-xs hover:underline cursor-pointer border-b border-gray-200">{{ subCategory.title }}</div>
+                        <div class="text-blue-700 font-bold text-xs hover:underline cursor-pointer border-b border-gray-200">{{ subCategory.title }} ({{subCategory.annonces_count}})</div>
                     </inertia-link>
                 </div>
             </div>
@@ -23,7 +23,8 @@
     export default {
         name: "Category",
         props: [
-            'category'
+            'category',
+            'current'
         ],
         methods: {
             spliceSubCategories (category) {

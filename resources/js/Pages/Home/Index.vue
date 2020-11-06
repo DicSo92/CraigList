@@ -7,7 +7,7 @@
                 </div>
 
                 <div class="col-span-7">
-                    <MainMiddle :categories="categories"></MainMiddle>
+                    <MainMiddle :categories="categories" :current="current"></MainMiddle>
                 </div>
                 <div class="col-span-2 bg-gray-200 p-3 borderX">
                     <MainRight :departments="departments"></MainRight>
