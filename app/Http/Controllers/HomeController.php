@@ -28,16 +28,13 @@ class HomeController extends Controller
 
         return Inertia::render('Home/Index', [
             "departments" => $department->all(),
-            "categories" => $category->with(['subCategories' => function ($query0) use ($current_department) {
-                $query0->withCount(['annonces' => function ($query) use ($current_department) {
-                    $query->where('department_id', $current_department->id);
-                }]);
-            }])->get(),
+//            "categories" => $category->with(['subCategories' => function ($query0) use ($current_department) {
+//                $query0->withCount(['annonces' => function ($query) use ($current_department) {
+//                    $query->where('department_id', $current_department->id);
+//                }]);
+//            }])->get(),
+            "categories" => $category->with('subCategories')->get(),
             "current" => $current_department,
-
-//            "categories" => $category->whereHas('subCategories', function ($query) {
-//                return $query->has('annonces');
-//            })->get()
         ]);
     }
 }

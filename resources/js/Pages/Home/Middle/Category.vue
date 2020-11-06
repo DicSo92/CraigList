@@ -11,7 +11,8 @@
                                       categorySlug: category.slug,
                                       subCategorySlug: subCategory.slug})"
                                   :key="subCategory.id">
-                        <div class="text-blue-700 font-bold text-xs hover:underline cursor-pointer border-b border-gray-200">{{ subCategory.title }} ({{subCategory.annonces_count}})</div>
+<!--                        <div class="text-blue-700 font-bold text-xs hover:underline cursor-pointer border-b border-gray-200">{{ subCategory.title }} ({{subCategory.annonces_count}})</div>-->
+                        <div class="text-blue-700 font-bold text-xs hover:underline cursor-pointer border-b border-gray-200">{{ subCategory.title }}</div>
                     </inertia-link>
                 </div>
             </div>
