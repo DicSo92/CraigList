@@ -2,9 +2,11 @@
     <div id="MainLeft" class="flex flex-col items-center">
         <h1 class="text-center text-2xl font-bold text-blue-700 hover:underline cursor-pointer">CraigList</h1>
 
-        <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow my-4">
-            Publier une annonce
-        </button>
+        <inertia-link :href="route('Annonce.create')">
+            <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow my-4">
+                Publier une annonce
+            </button>
+        </inertia-link>
 
         <div class="hover:underline cursor-pointer font-bold mb-5">Mon Compte</div>
 
