@@ -1,6 +1,5 @@
 <template>
     <app-layout>
-        <h1>Lorem Ipsum</h1>
     </app-layout>
 </template>
 
@@ -10,6 +9,12 @@
     export default {
         components: {
             AppLayout
+        },
+        created() {
+            let department = this.$store.state.departments.current_department
+            console.log(department)
+
+            this.$inertia.visit(this.route('home', {departmentSlug: department.slug}, {preserveState: true}))
         },
     }
 </script>

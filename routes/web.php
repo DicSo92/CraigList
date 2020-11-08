@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,13 +14,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia\Inertia::render('Dashboard');
+    return Inertia::render('Dashboard');
 })->name('dashboard');
 
+Route::group(['auth:sanctum', 'verified'], function () {
 
-Route::get('/home', 'App\Http\Controllers\HomeController@index');
+});
+
+
+//Route::get('/', \App\Http\Controllers\HomeController::class)->name('home');
+
+
+Route::get('/', \App\Http\Controllers\HomeController::class)->name('load');
+Route::get('/{currentDepartmentSlug}', \App\Http\Controllers\HomeController::class)->name('home');
+
+
+
+//Route::get('/{categorySlug}/{subCategorySlug}', '\App\Http\Controllers\AnnonceController@adsBySubCategory')->name('Annonce.adsBySubCategory');
+
+Route::get('/{currentDepartmentSlug}/{categorySlug}/{subCategorySlug}', '\App\Http\Controllers\AnnonceController@adsBySubCategory')->name('Annonce.adsBySubCategory');
+
+
+Route::get('/ad/create', '\App\Http\Controllers\AnnonceController@create')->name('Annonce.create');
+Route::post('/ad/store', '\App\Http\Controllers\AnnonceController@store')->name('Annonce.store');
