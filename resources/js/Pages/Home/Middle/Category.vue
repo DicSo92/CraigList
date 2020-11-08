@@ -1,7 +1,7 @@
 <template>
     <div id="Category">
         <h5 class="font-bold text-lg borderY bg-gray-200 w-full text-center mt-3 mb-2">{{ category.title }}</h5>
-        <div class="grid grid-cols-12 gap-3">
+        <div class="grid grid-cols-6 gap-3">
             <div v-for="part in spliceSubCategories(category).sub_categories"
                  :class="'col-span-' + spliceSubCategories(category).sizeCol" >
                 <div class="flex flex-col">
@@ -30,15 +30,15 @@
         methods: {
             spliceSubCategories (category) {
                 let splitInto = 2
-                let sizeCol = 6
+                let sizeCol = 3
 
                 if (category.id === 3) {
                     splitInto = 3
-                    sizeCol = 4
+                    sizeCol = 2
                 }
                 else if (category.id === 4 || category.id === 6 || category.id === 7) {
                     splitInto = 1
-                    sizeCol = 12
+                    sizeCol = 6
                 }
 
                 let sizePerArray = category.sub_categories.length / splitInto
