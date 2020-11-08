@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
+use JD\Cloudder\Facades\Cloudder;
 
 class AnnonceController extends Controller
 {
@@ -103,13 +104,12 @@ class AnnonceController extends Controller
         $imagesArray = array();
         $cloudinary_upload = null;
         foreach($request->images as $image) {
-            $cloudinary_upload = $image->getRealPath()->storeOnCloudinary( env('CLOUDINARY_MAIN_FOLDER') )->getSecurePath();
-            array_push($imagesArray, $cloudinary_upload);
+            Cloudder::upload($image->getRealPath(), null, array("folder" => env('CLOUDINARY_MAIN_FOLDER')));
+            $cloudinary_upload = Cloudder::getResult();
+            array_push($imagesArray, $cloudinary_upload['url']);
         }
-        cloudinary()->upload($request->file('file')->getRealPath())->getSecurePath();
 
         $annonce = new Annonce();
-
         $annonce->title = $request->get('title');
         $annonce->slug = $slug;
         $annonce->description = $request->get('description');
@@ -121,7 +121,6 @@ class AnnonceController extends Controller
         if (!empty($imagesArray)) {
             $annonce->images = $imagesArray;
         }
-
         $annonce->save();
 
         $current_department = $department->where('id', $request->get('departmentId'))->firstOrFail();
