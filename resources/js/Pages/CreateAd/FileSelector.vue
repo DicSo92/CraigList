@@ -18,7 +18,7 @@
         </div>
 
         <jet-secondary-button class="mt-2 mr-2" type="button" @click.native.prevent="inputFileClick">
-            Select A New Photo
+            Select Images
         </jet-secondary-button>
 
         <jet-input-error :message="errors.inputFile" class="mt-2"/>
@@ -45,7 +45,11 @@
                 images: [],
             }
         },
-        watch: {},
+        watch: {
+            images(val) {
+                this.$emit('changeImages', val)
+            }
+        },
         computed: {},
         methods: {
             inputFileClick() {

@@ -73,6 +73,12 @@
         watch: {
             selectedCategory(val) {
                 this.selectedSubCategory = ''
+            },
+            selectedDepartment(val) {
+                this.$emit('changeDepartment', val)
+            },
+            selectedSubCategory(val) {
+                this.$emit('changeSubCategory', val)
             }
         },
         computed: {

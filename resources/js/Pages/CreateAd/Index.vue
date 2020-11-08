@@ -5,13 +5,17 @@
                 <form @submit.prevent="submit" class="w-full">
                     <div class="grid grid-cols-6 gap-6">
                         <div class="col-span-2">
-                            <FileSelector :errors="errors" />
+                            <FileSelector :errors="errors"
+                                          @changeImages="images = $event" />
                         </div>
 
                         <div class="col-span-6 sm:col-span-4">
                             <div class="grid grid-cols-6 gap-6">
                                 <div class="col-span-6">
-                                    <Selectors :categories="categories" :departments="departments"/>
+                                    <Selectors :categories="categories"
+                                               :departments="departments"
+                                               @changeDepartment="selectedDepartment = $event"
+                                               @changeSubCategory="selectedSubCategory = $event"/>
                                 </div>
 
                                 <div class="col-span-6">
@@ -74,11 +78,10 @@
                 loading: false,
 
                 selectedDepartment: '',
-                selectedCategory: '',
                 selectedSubCategory: '',
 
-                title: this.title,
-                description: this.description,
+                title: '',
+                description: '',
                 images: []
             }
         },
@@ -87,7 +90,9 @@
         methods: {
             submit() {
                 let data = new FormData()
-                data.append('title', this.title || '')
+                data.append('departmentId', this.selectedDepartment)
+                data.append('subCategoryId', this.selectedSubCategory)
+                data.append('title', this.title)
                 data.append('description', this.description || '')
                 if (this.images) {
                     this.images.forEach(image => {
