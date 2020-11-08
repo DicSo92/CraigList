@@ -41,6 +41,7 @@ class AnnonceFactory extends Factory
             'slug' => $slug,
             'description' => $this->faker->paragraph($this->faker->numberBetween(1, 3)),
             'images' => $images,
+            'price' => $this->faker->numberBetween(1, 1500).' €',
             'user_id' => $this->faker->numberBetween(1, 1000),
             'department_id' => $this->faker->numberBetween(1, 106),
             'sub_category_id' => $this->faker->numberBetween(1, 183),

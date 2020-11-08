@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 //});
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia\Inertia::render('Dashboard');
+    return Inertia::render('Dashboard');
 })->name('dashboard');
 
 Route::group(['auth:sanctum', 'verified'], function () {
@@ -37,3 +38,7 @@ Route::get('/{currentDepartmentSlug}', \App\Http\Controllers\HomeController::cla
 //Route::get('/{categorySlug}/{subCategorySlug}', '\App\Http\Controllers\AnnonceController@adsBySubCategory')->name('Annonce.adsBySubCategory');
 
 Route::get('/{currentDepartmentSlug}/{categorySlug}/{subCategorySlug}', '\App\Http\Controllers\AnnonceController@adsBySubCategory')->name('Annonce.adsBySubCategory');
+
+
+Route::get('/ad/create', '\App\Http\Controllers\AnnonceController@create')->name('Annonce.create');
+Route::post('/ad/store', '\App\Http\Controllers\AnnonceController@store')->name('Annonce.store');
