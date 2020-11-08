@@ -18,6 +18,7 @@ class CreateAnnoncesTable extends Migration
             $table->string('title');
             $table->string('slug');
             $table->longText('description');
+            $table->string('price');
             $table->json('images')->nullable()->default(null);
             $table->foreignId('user_id')->constrained();
             $table->foreignId('department_id')->constrained();

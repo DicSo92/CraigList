@@ -41,3 +41,4 @@ Route::get('/{currentDepartmentSlug}/{categorySlug}/{subCategorySlug}', '\App\Ht
 
 
 Route::get('/ad/create', '\App\Http\Controllers\AnnonceController@create')->name('Annonce.create');
+Route::post('/ad/store', '\App\Http\Controllers\AnnonceController@store')->name('Annonce.store');

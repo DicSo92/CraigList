@@ -7,6 +7,8 @@ use App\Models\Category;
 use App\Models\Department;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class AnnonceController extends Controller
@@ -77,12 +79,58 @@ class AnnonceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Department   $department
+     *
+     * @param \App\Models\Category     $category
+     *
+     * @return \Inertia\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Department $department, Category $category)
     {
-        //
+        $request->validate([
+            'subCategoryId' => 'required',
+            'departmentId' => 'required',
+            'title' => 'required|max:200',
+            'description' => 'required|max:6000',
+            'price' => 'required',
+            'images' => 'array|max:24',
+            'images.*' => 'mimes:jpeg,bmp,jpg,png|between:1, 6000',
+        ]);
+
+        $slug = Str::slug($request->get('title'), '-');
+
+        $imagesArray = array();
+        $cloudinary_upload = null;
+        foreach($request->images as $image) {
+            $cloudinary_upload = $image->getRealPath()->storeOnCloudinary( env('CLOUDINARY_MAIN_FOLDER') )->getSecurePath();
+            array_push($imagesArray, $cloudinary_upload);
+        }
+        cloudinary()->upload($request->file('file')->getRealPath())->getSecurePath();
+
+        $annonce = new Annonce();
+
+        $annonce->title = $request->get('title');
+        $annonce->slug = $slug;
+        $annonce->description = $request->get('description');
+        $annonce->price = $request->get('price');
+        $annonce->department_id =  $request->get('departmentId');
+        $annonce->sub_category_id =  $request->get('subCategoryId');
+        $annonce->user_id =  Auth::id();
+
+        if (!empty($imagesArray)) {
+            $annonce->images = $imagesArray;
+        }
+
+        $annonce->save();
+
+        $current_department = $department->where('id', $request->get('departmentId'))->firstOrFail();
+
+        return Inertia::render('Home/Index', [
+            "departments" => $department->all(),
+            "categories" => $category->with('subCategories')->get(),
+            "current" => $current_department,
+        ]);
     }
 
     /**

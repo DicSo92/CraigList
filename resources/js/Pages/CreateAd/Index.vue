@@ -21,7 +21,8 @@
                                 <div class="col-span-6">
                                     <jet-label for="title" value="Title"/>
                                     <jet-input id="title" type="text" class="mt-1 block w-full" v-model="title"
-                                               autocomplete="title"/>
+                                               autocomplete="title"
+                                               placeholder="Title..."/>
                                     <jet-input-error :message="errors.title" class="mt-2"/>
                                 </div>
                                 <div class="col-span-6">
@@ -31,7 +32,14 @@
                                              v-model="description"/>
                                     <jet-input-error :message="errors.description" class="mt-2"/>
                                 </div>
-                                <div class="col-span-6">
+                                <div class="col-span-6 flex justify-between items-end">
+                                    <div class="">
+                                        <jet-label for="price" value="Price"/>
+                                        <jet-input id="price" type="text" class="mt-1 block" v-model="price"
+                                                   placeholder="12 €/h"
+                                                   autocomplete="price"/>
+                                        <jet-input-error :message="errors.price" class="mt-2"/>
+                                    </div>
                                     <div class="flex items-center justify-end text-right">
                                         <jet-button :class="{ 'opacity-25': loading }" :disabled="loading">
                                             Submit
@@ -82,7 +90,8 @@
 
                 title: '',
                 description: '',
-                images: []
+                images: [],
+                price: ''
             }
         },
         watch: {},
@@ -94,13 +103,14 @@
                 data.append('subCategoryId', this.selectedSubCategory)
                 data.append('title', this.title)
                 data.append('description', this.description || '')
+                data.append('price', this.price)
                 if (this.images) {
                     this.images.forEach(image => {
                         data.append('images[]', image)
                     })
                 }
 
-                // this.$inertia.post('/ad', data)
+                this.$inertia.post('/ad/store', data)
                 console.log('submitted')
             },
         }
