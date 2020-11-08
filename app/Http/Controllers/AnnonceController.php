@@ -60,11 +60,18 @@ class AnnonceController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Category     $category
+     * @param \App\Models\Department   $department
+     *
+     * @return \Inertia\Response
      */
-    public function create()
+    public function create(Request $request, Category $category, Department $department)
     {
-        //
+        return Inertia::render('CreateAd/Index', [
+            "departments" => $department->all(),
+            "categories" => $category->with('subCategories')->get(),
+        ]);
     }
 
     /**
