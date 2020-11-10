@@ -135,12 +135,23 @@ class AnnonceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Annonce  $annonce
-     * @return \Illuminate\Http\Response
+     * @param \App\Models\Annonce  $annonce
+     * @param \App\Models\Category $category
+     * @param                      $currentDepartmentSlug
+     * @param                      $categorySlug
+     * @param                      $subCategorySlug
+     * @param                      $annonceSlug
+     *
+     * @return \Inertia\Response
      */
-    public function show(Annonce $annonce)
+    public function show(Annonce $annonce, Category $category, $currentDepartmentSlug, $categorySlug, $subCategorySlug, $annonceSlug)
     {
-        //
+        $category = $category->where('slug', $categorySlug)->first();
+
+        return Inertia::render('Annonce/Index', [
+            "category" => $category,
+            "annonce" => $annonce->where('slug', $annonceSlug)->with(['department', 'subCategory'])->first(),
+        ]);
     }
 
     /**

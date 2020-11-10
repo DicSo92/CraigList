@@ -39,6 +39,7 @@ Route::get('/{currentDepartmentSlug}', \App\Http\Controllers\HomeController::cla
 
 Route::get('/{currentDepartmentSlug}/{categorySlug}/{subCategorySlug}', '\App\Http\Controllers\AnnonceController@adsBySubCategory')->name('Annonce.adsBySubCategory');
 
+Route::get('/{currentDepartmentSlug}/{categorySlug}/{subCategorySlug}/{annonceSlug}', '\App\Http\Controllers\AnnonceController@show')->name('Annonce.show');
 
 Route::get('/ad/create', '\App\Http\Controllers\AnnonceController@create')->name('Annonce.create');
 Route::post('/ad/store', '\App\Http\Controllers\AnnonceController@store')->name('Annonce.store');

@@ -9,8 +9,13 @@
                 </Pagination>
             </div>
             <div class="w-full grid grid-cols-12 gap-4">
-                <div class="col-span-3" v-for="annonce in annonces.data" :key="annonce.id">
-                    <Card :annonce="annonce"></Card>
+                <div class="col-span-3"
+                     v-for="annonce in annonces.data"
+                     :key="annonce.id">
+                    <Card :annonce="annonce"
+                          :current="current"
+                          :subCategory="sub_category"
+                          :category="category"></Card>
                 </div>
             </div>
         </div>
