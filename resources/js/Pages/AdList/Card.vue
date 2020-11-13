@@ -31,9 +31,6 @@
             <p class="text-gray-700 text-base ellipsis">
                 {{ annonce.description }}
             </p>
-            <p class="text-blue-700 text-base ellipsis">
-                Text Test deploy
-            </p>
         </div>
 
         <div class="flex-grow flex items-end">
