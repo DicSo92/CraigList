@@ -32,7 +32,9 @@
         },
         methods: {
             goPublishPage() {
-                this.$inertia.visit(this.route('Annonce.create'))
+                this.$inertia.visit(this.route('Annonce.create'), { method: 'get' }, {
+                    preserveState: true
+                })
             }
         }
     }
