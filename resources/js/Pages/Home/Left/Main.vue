@@ -1,6 +1,6 @@
 <template>
     <div id="MainLeft" class="flex flex-col items-center">
-        <h1 class="text-center text-2xl font-bold text-blue-700 hover:underline cursor-pointer" @click="goPublishPage">CraigList</h1>
+        <h1 class="text-center text-2xl font-bold text-blue-700 hover:underline cursor-pointer">CraigList</h1>
 
         <inertia-link :href="route('Annonce.create')" method="get">
             <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow my-4">
@@ -31,17 +31,6 @@
             Links,
         },
         methods: {
-            goPublishPage() {
-                this.$inertia.visit(this.route('Annonce.create'), { method: 'get' }, {
-                    preserveState: true
-                }).then(
-                    () => {
-                        console.log('success')
-                    },
-                    (res) => {
-                        console.log(res)
-                    });
-            }
         }
     }
 </script>
