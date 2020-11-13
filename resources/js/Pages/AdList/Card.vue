@@ -1,6 +1,6 @@
 <template>
     <div class="max-w-sm rounded overflow-hidden shadow-lg h-full flex flex-col">
-        <img class="w-full"
+        <img class="w-full cursor-pointer" @click="goToProduct"
              :src="annonce.images ? annonce.images[0] : 'https://icon-library.com/images/no-image-available-icon/no-image-available-icon-16.jpg'"
              alt="Sunset in the mountains">
         <div class="px-5 py-4">
@@ -21,8 +21,8 @@
                       currentDepartmentSlug: current.slug,
                       categorySlug: category.slug,
                       subCategorySlug: subCategory.slug,
-                      annonceSlug: annonce.slug})">
-                    <p class="font-bold mb-2">
+                      annonceSlug: annonce.slug})" method="get">
+                    <p class="font-bold mb-2 cursor-pointer">
                         {{ annonce.title }}
                     </p>
                 </inertia-link>
@@ -54,6 +54,21 @@
         data () {
             return {
                 favorite: false
+            }
+        },
+        methods: {
+            goToProduct() {
+                this.$inertia.visit(this.route('Annonce.show',
+                    {
+                        currentDepartmentSlug: this.current.slug,
+                        categorySlug: this.category.slug,
+                        subCategorySlug: this.subCategory.slug,
+                        annonceSlug: this.annonce.slug
+                    },
+                    {
+                        preserveState: true
+                    }
+                ))
             }
         }
     }
