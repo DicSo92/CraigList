@@ -25,7 +25,7 @@
 </template>
 
 <script>
-    import Search from "./Search";
+    import Search from "./../../../Components/Search";
     import Links from "./Links";
     import Calendar from "./Calendar";
 
