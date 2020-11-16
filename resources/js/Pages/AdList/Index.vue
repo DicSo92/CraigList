@@ -1,5 +1,21 @@
 <template>
     <app-layout>
+        <template #header>
+            <div class="flex">
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                    Home
+                </h2>
+                <span class="font-bold mx-2">></span>
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                    {{category.slug}}
+                </h2>
+                <span class="font-bold mx-2">></span>
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                    {{sub_category.slug}}
+                </h2>
+            </div>
+        </template>
+
         <div class="container mx-auto flex flex-col items-center justify-center py-4">
             <div class="mb-4 w-full flex justify-end">
                 <Pagination :annonces="annonces"
@@ -47,7 +63,6 @@
         },
         computed: {},
         methods: {
-
         }
     }
 </script>

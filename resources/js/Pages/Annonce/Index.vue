@@ -1,5 +1,25 @@
 <template>
     <app-layout>
+        <template #header>
+            <div class="flex">
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                    Home
+                </h2>
+                <span class="font-bold mx-2">></span>
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                    {{category.slug}}
+                </h2>
+                <span class="font-bold mx-2">></span>
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                    {{annonce.sub_category.slug}}
+                </h2>
+                <span class="font-bold mx-2">></span>
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                    {{annonce.slug}}
+                </h2>
+            </div>
+        </template>
+
         <div class="container mx-auto flex-col justify-center py-4">
             <h2 class="text-2xl font-bold border-b mb-3">{{annonce.title}}</h2>
             <div class="w-full grid grid-cols-12 gap-4">

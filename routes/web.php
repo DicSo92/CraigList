@@ -41,5 +41,5 @@ Route::get('/{currentDepartmentSlug}/{categorySlug}/{subCategorySlug}', '\App\Ht
 
 Route::get('/{currentDepartmentSlug}/{categorySlug}/{subCategorySlug}/{annonceSlug}', '\App\Http\Controllers\AnnonceController@show')->name('Annonce.show');
 
-Route::get('/ad/create', '\App\Http\Controllers\AnnonceController@create')->name('Annonce.create');
+Route::middleware(['auth:sanctum', 'verified'])->get('/ad/create', '\App\Http\Controllers\AnnonceController@create')->name('Annonce.create');
 Route::post('/ad/store', '\App\Http\Controllers\AnnonceController@store')->name('Annonce.store');
