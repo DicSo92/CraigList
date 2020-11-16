@@ -17,12 +17,11 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(UserSeeder::class);
 
-        Annonce::factory(30000)->create();
-
         $this->call(DepartmentSeeder::class);
-//
         $this->call(CategorySeeder::class);
-//
         $this->call(SubCategorySeeder::class);
+
+//        Annonce::factory(30000)->create();
+        Annonce::factory(9800)->create();
     }
 }

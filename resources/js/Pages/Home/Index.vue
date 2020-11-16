@@ -1,5 +1,11 @@
 <template>
     <app-layout>
+        <template #header>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                Home
+            </h2>
+        </template>
+
         <div class="container mx-auto flex justify-center py-4">
             <div class="w-full grid grid-cols-12 gap-4">
                 <div class="col-span-3 bg-gray-200 p-3 borderX">
