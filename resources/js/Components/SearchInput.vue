@@ -27,23 +27,33 @@
                 No result
             </h3>
 
+            <!--Annonces------------------------------------------------------------------>
             <div class="flex justify-between mt-2 px-3 bg-gray-200 items-center"
                  v-if="searchAnnonces && searchAnnonces.total">
                 <h3 class="">Annonces :</h3>
-                <h3 class="text-sm font-bold underline hover:text-black cursor-pointer"
-                    v-if="searchAnnonces.total > 10" @click="seeMoreAnnonces">
+                <inertia-link class="text-sm font-bold underline hover:text-black cursor-pointer"
+                              v-if="searchAnnonces.total > 10"
+                              :href="route('Search.index', {
+                                  currentDepartmentSlug: this.$store.state.departments.current_department.slug,
+                                  search: this.search
+                              })">
                     See more({{searchAnnonces.total}})
-                </h3>
+                </inertia-link>
             </div>
             <div class="flex flex-col items-start">
-                <p class="ml-5 cursor-pointer hover:text-black"
-                   v-for="annonce in searchAnnonces.data"
-                   @click="goToAnnonce(annonce)"
-                   :key="annonce.id">
+                <inertia-link class="ml-5 cursor-pointer hover:text-black"
+                              v-for="annonce in searchAnnonces.data"
+                              :key="annonce.id"
+                              :href="route('Annonce.show', {
+                                  currentDepartmentSlug: annonce.department.slug,
+                                  categorySlug: annonce.sub_category.category.slug,
+                                  subCategorySlug: annonce.sub_category.slug,
+                                  annonceSlug: annonce.slug
+                              })">
                     {{annonce.title}}
-                </p>
+                </inertia-link>
             </div>
-
+            <!--Categories------------------------------------------------------------------>
             <div class="flex justify-between mt-2 px-3 bg-gray-200 items-center"
                  v-if="searchCategories && searchCategories.total">
                 <h3 class="">Categories :</h3>
@@ -52,12 +62,18 @@
                 </h3>
             </div>
             <div class="flex flex-col items-start">
-                <inertia-link class="ml-5 cursor-pointer hover:text-black" v-for="category in searchCategories.data"
-                              :key="category.id" href="">
-                    {{category.title}}
+                <inertia-link class="ml-5 cursor-pointer hover:text-black"
+                              v-for="subCategory in searchCategories.data"
+                              :key="subCategory.id"
+                              :href="route('Annonce.adsBySubCategory', {
+                                  currentDepartmentSlug: $store.state.departments.current_department.slug,
+                                  categorySlug: subCategory.category.slug,
+                                  subCategorySlug: subCategory.slug
+                              })">
+                    {{subCategory.title}}
                 </inertia-link>
             </div>
-
+            <!--Departments------------------------------------------------------------------>
             <div class="flex justify-between mt-2 px-3 bg-gray-200 items-center"
                  v-if="searchDepartments && searchDepartments.total">
                 <h3 class="">Departments :</h3>
@@ -67,7 +83,9 @@
             </div>
             <div class="flex flex-col items-start">
                 <inertia-link class="ml-5 cursor-pointer hover:text-black" v-for="department in searchDepartments.data"
-                              :key="department.id" href="">
+                              :key="department.id"
+                              :href="route('home', {currentDepartmentSlug: department.slug})"
+                              @click="changeCurrentDepartment(department)">
                     {{department.name}}
                 </inertia-link>
             </div>
@@ -122,25 +140,15 @@
                     })
             },
             goToSearch() {
-                this.seeMoreAnnonces()
-            },
-            goToAnnonce(annonce) {
-                this.$inertia.visit(this.route('Annonce.show',
-                    {
-                        currentDepartmentSlug: annonce.department.slug,
-                        categorySlug: annonce.sub_category.category.slug,
-                        subCategorySlug: annonce.sub_category.slug,
-                        annonceSlug: annonce.slug
-                    }
-                ))
-            },
-            seeMoreAnnonces() {
                 this.$inertia.visit(this.route('Search.index',
                     {
                         currentDepartmentSlug: this.$store.state.departments.current_department.slug,
                         search: this.search
                     }
                 ))
+            },
+            changeCurrentDepartment(department) {
+                this.$store.commit('departments/changeCurrentDepartment', department)
             },
             focusOut() {
                 setTimeout(() => { // Prevent links do nothing

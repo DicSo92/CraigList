@@ -1,8 +1,17 @@
 <template>
     <div class="rounded overflow-hidden shadow-lg h-full flex flex-col w-full">
-        <img class="w-full cursor-pointer" @click="goToAnnonce"
-             :src="annonce.images ? annonce.images[0] : 'https://icon-library.com/images/no-image-available-icon/no-image-available-icon-16.jpg'"
-             alt="Sunset in the mountains">
+        <inertia-link :href="route('Annonce.show', {
+                            currentDepartmentSlug: annonce.department.slug,
+                            categorySlug: annonce.sub_category.category.slug,
+                            subCategorySlug: annonce.sub_category.slug,
+                            annonceSlug: annonce.slug
+                        }, {
+                            preserveState: true
+                        })">
+            <img class="w-full cursor-pointer"
+                 :src="annonce.images ? annonce.images[0] : 'https://icon-library.com/images/no-image-available-icon/no-image-available-icon-16.jpg'"
+                 alt="Sunset in the mountains">
+        </inertia-link>
         <div class="px-5 py-4">
             <div class="flex">
                 <span class="float-left mr-1 -mt-1">
@@ -18,9 +27,17 @@
                     </svg>
                 </span>
 
-                <p class="font-bold mb-2 cursor-pointer" @click="goToAnnonce">
+                <inertia-link class="font-bold mb-2 cursor-pointer"
+                              :href="route('Annonce.show', {
+                                  currentDepartmentSlug: annonce.department.slug,
+                                  categorySlug: annonce.sub_category.category.slug,
+                                  subCategorySlug: annonce.sub_category.slug,
+                                  annonceSlug: annonce.slug
+                              }, {
+                                  preserveState: true
+                              })">
                     {{ annonce.title }}
-                </p>
+                </inertia-link>
 
             </div>
             <p class="text-gray-700 text-base ellipsis">
@@ -49,19 +66,6 @@
             }
         },
         methods: {
-            goToAnnonce() {
-                this.$inertia.visit(this.route('Annonce.show',
-                    {
-                        currentDepartmentSlug: this.annonce.department.slug,
-                        categorySlug: this.annonce.sub_category.category.slug,
-                        subCategorySlug: this.annonce.sub_category.slug,
-                        annonceSlug: this.annonce.slug
-                    },
-                    {
-                        preserveState: true
-                    }
-                ))
-            }
         }
     }
 </script>

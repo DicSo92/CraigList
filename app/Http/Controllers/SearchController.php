@@ -26,7 +26,7 @@ class SearchController extends Controller
         $current_department = $department->where('slug', $currentDepartmentSlug)->firstOrFail();
 
         $departments = Department::where('name', 'like', '%' . $search . '%')->paginate(10);
-        $categories = SubCategory::where('title', 'like', '%' . $search . '%')->paginate(10);
+        $categories = SubCategory::where('title', 'like', '%' . $search . '%')->with('category')->paginate(10);
         $annonces = Annonce::where([['title', 'like', '%' . $search . '%'], ['department_id', $current_department->id]])->with(['subCategory.category', 'department'])->paginate(10);
 
 
