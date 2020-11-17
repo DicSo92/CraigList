@@ -1,7 +1,7 @@
 <template>
     <div class="relative text-gray-600 w-full flex items-center">
         <input class="w-full pl-5 pr-9 text-sm z-40 form-input rounded-md shadow-sm"
-               name="search" placeholder="Search..."
+               name="search" placeholder="Search..." autocomplete="off"
                v-model="search"
                @keyup.enter="getSearch"
                @focusout="focusOut"
