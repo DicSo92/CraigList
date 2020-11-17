@@ -1,10 +1,11 @@
 <template>
     <div class="relative text-gray-600 w-full flex items-center">
-        <input class="w-full pl-5 pr-8 text-sm z-40 form-input rounded-md shadow-sm"
-               type="search" name="search" placeholder="Search..."
+        <input class="w-full pl-5 pr-9 text-sm z-40 form-input rounded-md shadow-sm"
+               name="search" placeholder="Search..."
                v-model="search"
                @keyup.enter="getSearch"
-               @focusout="dropdown = false" @focusin="dropdown = !!search.length"/>
+               @focusout="dropdown = false"
+               @focusin="dropdown = !!search.length"/>
 
         <div class="absolute right-3 z-50" v-if="loading">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="h-5 w-5 fill-current">
@@ -25,33 +26,42 @@
                 No result
             </h3>
 
-            <h3 v-if="searchAnnonces && searchAnnonces.total"
-                class="mt-2 px-3 bg-gray-200">
-                Annonces ({{searchAnnonces.total}}) :
-            </h3>
-            <div class="flex flex-col">
+            <div class="flex justify-between mt-2 px-3 bg-gray-200 items-center"
+                 v-if="searchAnnonces && searchAnnonces.total">
+                <h3 class="">Annonces :</h3>
+                <h3 class="text-sm font-bold underline hover:text-black cursor-pointer" v-if="searchAnnonces.total > 10">
+                    See more({{searchAnnonces.total}})
+                </h3>
+            </div>
+            <div class="flex flex-col items-start">
                 <inertia-link class="ml-5 cursor-pointer hover:text-black" v-for="annonce in searchAnnonces.data"
                               :key="annonce.id" href="">
                     {{annonce.title}}
                 </inertia-link>
             </div>
 
-            <h3 v-if="searchCategories && searchCategories.total"
-                class="mt-2 px-3 bg-gray-200">
-                Categories ({{searchCategories.total}}) :
-            </h3>
-            <div class="flex flex-col">
+            <div class="flex justify-between mt-2 px-3 bg-gray-200 items-center"
+                 v-if="searchCategories && searchCategories.total">
+                <h3 class="">Categories :</h3>
+                <h3 class="text-sm font-bold underline hover:text-black cursor-pointer" v-if="searchCategories.total > 10">
+                    See more({{searchCategories.total}})
+                </h3>
+            </div>
+            <div class="flex flex-col items-start">
                 <inertia-link class="ml-5 cursor-pointer hover:text-black" v-for="category in searchCategories.data"
                               :key="category.id" href="">
                     {{category.title}}
                 </inertia-link>
             </div>
 
-            <h3 v-if="searchDepartments && searchDepartments.total"
-                class="mt-2 px-3 bg-gray-200">
-                Departments ({{searchDepartments.total}}) :
-            </h3>
-            <div class="flex flex-col">
+            <div class="flex justify-between mt-2 px-3 bg-gray-200 items-center"
+                 v-if="searchDepartments && searchDepartments.total">
+                <h3 class="">Departments :</h3>
+                <h3 class="text-sm font-bold underline hover:text-black cursor-pointer" v-if="searchDepartments.total > 10">
+                    See more({{searchDepartments.total}})
+                </h3>
+            </div>
+            <div class="flex flex-col items-start">
                 <inertia-link class="ml-5 cursor-pointer hover:text-black" v-for="department in searchDepartments.data"
                               :key="department.id" href="">
                     {{department.name}}
