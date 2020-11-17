@@ -41,9 +41,6 @@
     export default {
         name: "Card",
         props: [
-            'category',
-            'subCategory',
-            'current',
             'annonce'
         ],
         data () {
@@ -55,9 +52,9 @@
             goToAnnonce() {
                 this.$inertia.visit(this.route('Annonce.show',
                     {
-                        currentDepartmentSlug: this.current.slug,
-                        categorySlug: this.category.slug,
-                        subCategorySlug: this.subCategory.slug,
+                        currentDepartmentSlug: this.annonce.department.slug,
+                        categorySlug: this.annonce.sub_category.category.slug,
+                        subCategorySlug: this.annonce.sub_category.slug,
                         annonceSlug: this.annonce.slug
                     },
                     {

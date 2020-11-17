@@ -29,10 +29,7 @@
     export default {
         name: "Pagination",
         props: [
-            'category',
-            'subCategory',
             'annonces',
-            'current'
         ],
         components: {
             Paginate
@@ -53,20 +50,7 @@
         },
         methods: {
             changePage(pageNum) {
-                console.log(pageNum)
-
-                this.$inertia.visit(this.route('Annonce.adsBySubCategory',
-                    {
-                        currentDepartmentSlug: this.current.slug,
-                        categorySlug: this.category.slug,
-                        subCategorySlug: this.subCategory.slug,
-                        page: pageNum,
-                        nb: this.selectedOption
-                    },
-                    {
-                        preserveState: true
-                    }
-                ))
+                this.$emit('changePage', {pageNum, perPage: this.selectedOption})
             }
         }
     }
