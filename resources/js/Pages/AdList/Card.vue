@@ -1,6 +1,6 @@
 <template>
     <div class="max-w-sm rounded overflow-hidden shadow-lg h-full flex flex-col">
-        <img class="w-full cursor-pointer" @click="goToProduct"
+        <img class="w-full cursor-pointer" @click="goToAnnonce"
              :src="annonce.images ? annonce.images[0] : 'https://icon-library.com/images/no-image-available-icon/no-image-available-icon-16.jpg'"
              alt="Sunset in the mountains">
         <div class="px-5 py-4">
@@ -18,7 +18,7 @@
                     </svg>
                 </span>
 
-                <p class="font-bold mb-2 cursor-pointer" @click="goToProduct">
+                <p class="font-bold mb-2 cursor-pointer" @click="goToAnnonce">
                     {{ annonce.title }}
                 </p>
 
@@ -52,7 +52,7 @@
             }
         },
         methods: {
-            goToProduct() {
+            goToAnnonce() {
                 this.$inertia.visit(this.route('Annonce.show',
                     {
                         currentDepartmentSlug: this.current.slug,

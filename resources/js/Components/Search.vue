@@ -4,7 +4,7 @@
                name="search" placeholder="Search..."
                v-model="search"
                @keyup.enter="getSearch"
-               @focusout="dropdown = false"
+               @focusout="focusOut"
                @focusin="dropdown = !!search.length"/>
 
         <div class="absolute right-3 z-50" v-if="loading">
@@ -20,6 +20,7 @@
             </svg>
         </button>
 
+        <!--Dropdown-->
         <div class="dropdown absolute rounded top-0 pt-10 pb-2 w-full bg-white border z-20" v-if="dropdown && search">
             <h3 class="mt-2 px-3 bg-gray-200"
                 v-if="!searchDepartments.total && !searchCategories.total && !searchAnnonces.total">
@@ -34,10 +35,12 @@
                 </h3>
             </div>
             <div class="flex flex-col items-start">
-                <inertia-link class="ml-5 cursor-pointer hover:text-black" v-for="annonce in searchAnnonces.data"
-                              :key="annonce.id" href="">
+                <p class="ml-5 cursor-pointer hover:text-black"
+                   v-for="annonce in searchAnnonces.data"
+                   @click="goToAnnonce(annonce)"
+                   :key="annonce.id">
                     {{annonce.title}}
-                </inertia-link>
+                </p>
             </div>
 
             <div class="flex justify-between mt-2 px-3 bg-gray-200 items-center"
@@ -116,6 +119,24 @@
                     .catch(error => {
                         console.log(error)
                     })
+            },
+
+            goToAnnonce(annonce) {
+                console.log('test')
+                this.$inertia.visit(this.route('Annonce.show',
+                    {
+                        currentDepartmentSlug: annonce.department.slug,
+                        categorySlug: annonce.sub_category.category.slug,
+                        subCategorySlug: annonce.sub_category.slug,
+                        annonceSlug: annonce.slug
+                    }
+                ))
+            },
+
+            focusOut() {
+                setTimeout(() => { // Prevent links do nothing
+                    this.dropdown = false
+                }, 100)
             }
         }
     }

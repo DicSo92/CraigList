@@ -23,7 +23,7 @@ class SearchController extends Controller
 
         $departments = Department::where('name', 'like', '%' . $search . '%')->paginate(10);
         $categories = SubCategory::where('title', 'like', '%' . $search . '%')->paginate(10);
-        $annonces = Annonce::where('title', 'like', '%' . $search . '%')->paginate(10);
+        $annonces = Annonce::where('title', 'like', '%' . $search . '%')->with(['subCategory.category', 'department'])->paginate(10);
 
 
         return response()->json([
