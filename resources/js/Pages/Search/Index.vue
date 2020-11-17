@@ -20,7 +20,10 @@
             <div class="mb-4 w-full flex justify-end">
                 <Pagination :annonces="annonces" @changePage="changePage" />
             </div>
-            <div class="w-full grid grid-cols-12 gap-4">
+            <h3 class="text-gray-300 text-5xl font-bold" v-if="!annonces.total">
+                No Result
+            </h3>
+            <div class="w-full grid grid-cols-12 gap-4" v-else>
                 <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3"
                      v-for="annonce in annonces.data"
                      :key="annonce.id">

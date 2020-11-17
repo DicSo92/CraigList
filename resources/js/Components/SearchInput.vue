@@ -27,7 +27,7 @@
                 No result
             </h3>
 
-            <!--Annonces------------------------------------------------------------------>
+            <!--------------------------------------------Annonces----------------------------------------------------->
             <div class="flex justify-between mt-2 px-3 bg-gray-200 items-center"
                  v-if="searchAnnonces && searchAnnonces.total">
                 <h3 class="">Annonces :</h3>
@@ -53,7 +53,7 @@
                     {{annonce.title}}
                 </inertia-link>
             </div>
-            <!--Categories------------------------------------------------------------------>
+            <!--------------------------------------------Categories--------------------------------------------------->
             <div class="flex justify-between mt-2 px-3 bg-gray-200 items-center"
                  v-if="searchCategories && searchCategories.total">
                 <h3 class="">Categories :</h3>
@@ -73,7 +73,7 @@
                     {{subCategory.title}}
                 </inertia-link>
             </div>
-            <!--Departments------------------------------------------------------------------>
+            <!--------------------------------------------Departments-------------------------------------------------->
             <div class="flex justify-between mt-2 px-3 bg-gray-200 items-center"
                  v-if="searchDepartments && searchDepartments.total">
                 <h3 class="">Departments :</h3>
