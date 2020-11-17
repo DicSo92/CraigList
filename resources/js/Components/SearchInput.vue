@@ -30,7 +30,8 @@
             <div class="flex justify-between mt-2 px-3 bg-gray-200 items-center"
                  v-if="searchAnnonces && searchAnnonces.total">
                 <h3 class="">Annonces :</h3>
-                <h3 class="text-sm font-bold underline hover:text-black cursor-pointer" v-if="searchAnnonces.total > 10">
+                <h3 class="text-sm font-bold underline hover:text-black cursor-pointer"
+                    v-if="searchAnnonces.total > 10" @click="seeMoreAnnonces">
                     See more({{searchAnnonces.total}})
                 </h3>
             </div>
@@ -120,9 +121,7 @@
                         console.log(error)
                     })
             },
-
             goToAnnonce(annonce) {
-                console.log('test')
                 this.$inertia.visit(this.route('Annonce.show',
                     {
                         currentDepartmentSlug: annonce.department.slug,
@@ -132,12 +131,20 @@
                     }
                 ))
             },
-
+            seeMoreAnnonces() {
+                this.$inertia.visit(this.route('Search.index',
+                    {
+                        currentDepartmentSlug: this.$store.state.departments.current_department.slug,
+                        search: this.search
+                    }
+                ))
+            },
             focusOut() {
                 setTimeout(() => { // Prevent links do nothing
                     this.dropdown = false
-                }, 100)
-            }
+                }, 150)
+            },
+
         }
     }
 </script>

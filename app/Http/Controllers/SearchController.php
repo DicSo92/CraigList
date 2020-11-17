@@ -44,13 +44,14 @@ class SearchController extends Controller
         $nb = $request->query('nb');
 
         if (!isset($nb))
-            $ads = $annonce->with('user')->where([['title', 'like', '%' . $search . '%'], ['department_id', $current_department->id]])->orderBy('created_at', 'DESC')->with(['subCategory.category', 'department'])->paginate(12);
+            $ads = $annonce->with(['subCategory.category', 'department', 'user'])->where([['title', 'like', '%' . $search . '%'], ['department_id', $current_department->id]])->orderBy('created_at', 'DESC')->paginate(12);
         else
-            $ads = $annonce->with('user')->where([['title', 'like', '%' . $search . '%'], ['department_id', $current_department->id]])->orderBy('created_at', 'DESC')->with(['subCategory.category', 'department'])->paginate($nb);
+            $ads = $annonce->with(['subCategory.category', 'department', 'user'])->where([['title', 'like', '%' . $search . '%'], ['department_id', $current_department->id]])->orderBy('created_at', 'DESC')->paginate($nb);
 
         return Inertia::render('Search/Index', [
             "annonces" => $ads,
             "current" => $current_department,
+            "search" => $search
         ]);
     }
 }

@@ -11,7 +11,7 @@
                 </h2>
                 <span class="font-bold mx-2">></span>
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    aaaa
+                    {{search}}
                 </h2>
             </div>
         </template>
@@ -40,7 +40,8 @@
         name: "Search",
         props: [
             'annonces',
-            'current'
+            'current',
+            'search'
         ],
         components: {
             AppLayout,
@@ -58,7 +59,7 @@
                 this.$inertia.visit(this.route('Search.index',
                     {
                         currentDepartmentSlug: this.current.slug,
-                        search: 'te',
+                        search: this.search,
                         page: pageNum,
                         nb: perPage
                     },
