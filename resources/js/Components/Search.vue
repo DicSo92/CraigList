@@ -1,9 +1,10 @@
 <template>
     <div class="relative text-gray-600 w-full flex items-center">
         <input class="w-full pl-5 pr-8 text-sm z-40 form-input rounded-md shadow-sm"
-                   type="search" name="search" placeholder="Search..."
-                   v-model="search"
-                   @keyup.enter="getSearch" />
+               type="search" name="search" placeholder="Search..."
+               v-model="search"
+               @keyup.enter="getSearch"
+               @focusout="dropdown = false" @focusin="dropdown = !!search.length"/>
 
         <div class="absolute right-3 z-50" v-if="loading">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="h-5 w-5 fill-current">
@@ -28,19 +29,34 @@
                 class="mt-2 px-3 bg-gray-200">
                 Annonces ({{searchAnnonces.total}}) :
             </h3>
-            <p class="ml-5" v-for="annonce in searchAnnonces.data">{{annonce.title}}</p>
+            <div class="flex flex-col">
+                <inertia-link class="ml-5 cursor-pointer hover:text-black" v-for="annonce in searchAnnonces.data"
+                              :key="annonce.id" href="">
+                    {{annonce.title}}
+                </inertia-link>
+            </div>
 
             <h3 v-if="searchCategories && searchCategories.total"
                 class="mt-2 px-3 bg-gray-200">
                 Categories ({{searchCategories.total}}) :
             </h3>
-            <p class="ml-5" v-for="category in searchCategories.data">{{category.title}}</p>
+            <div class="flex flex-col">
+                <inertia-link class="ml-5 cursor-pointer hover:text-black" v-for="category in searchCategories.data"
+                              :key="category.id" href="">
+                    {{category.title}}
+                </inertia-link>
+            </div>
 
             <h3 v-if="searchDepartments && searchDepartments.total"
                 class="mt-2 px-3 bg-gray-200">
                 Departments ({{searchDepartments.total}}) :
             </h3>
-            <p class="ml-5" v-for="department in searchDepartments.data">{{department.name}}</p>
+            <div class="flex flex-col">
+                <inertia-link class="ml-5 cursor-pointer hover:text-black" v-for="department in searchDepartments.data"
+                              :key="department.id" href="">
+                    {{department.name}}
+                </inertia-link>
+            </div>
         </div>
     </div>
 </template>
