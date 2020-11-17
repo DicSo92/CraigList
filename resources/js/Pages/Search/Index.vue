@@ -11,7 +11,7 @@
                 </h2>
                 <span class="font-bold mx-2">></span>
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    {{search}}
+                    "{{search}}"
                 </h2>
             </div>
         </template>
@@ -21,7 +21,7 @@
                 <Pagination :annonces="annonces" @changePage="changePage" />
             </div>
             <div class="w-full grid grid-cols-12 gap-4">
-                <div class="col-span-3"
+                <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3"
                      v-for="annonce in annonces.data"
                      :key="annonce.id">
                     <Card :annonce="annonce"/>

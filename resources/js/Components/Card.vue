@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-sm rounded overflow-hidden shadow-lg h-full flex flex-col">
+    <div class="rounded overflow-hidden shadow-lg h-full flex flex-col w-full">
         <img class="w-full cursor-pointer" @click="goToAnnonce"
              :src="annonce.images ? annonce.images[0] : 'https://icon-library.com/images/no-image-available-icon/no-image-available-icon-16.jpg'"
              alt="Sunset in the mountains">
