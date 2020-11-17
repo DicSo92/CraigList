@@ -7,15 +7,15 @@
                 </h2>
                 <span class="font-bold mx-2">></span>
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    {{category.slug}}
+                    {{category.title}}
                 </h2>
                 <span class="font-bold mx-2">></span>
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    {{annonce.sub_category.slug}}
+                    {{annonce.sub_category.title}}
                 </h2>
                 <span class="font-bold mx-2">></span>
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    {{annonce.slug}}
+                    {{annonce.title}}
                 </h2>
             </div>
         </template>

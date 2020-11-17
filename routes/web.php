@@ -18,28 +18,21 @@ use Inertia\Inertia;
 //    return view('welcome');
 //});
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->name('dashboard');
-
 Route::group(['auth:sanctum', 'verified'], function () {
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
 
+    Route::get('/ad/create', '\App\Http\Controllers\AnnonceController@create')->name('Annonce.create');
 });
-
-
-//Route::get('/', \App\Http\Controllers\HomeController::class)->name('home');
 
 
 Route::get('/', \App\Http\Controllers\HomeController::class)->name('load');
 Route::get('/{currentDepartmentSlug}', \App\Http\Controllers\HomeController::class)->name('home');
 
-
-
-//Route::get('/{categorySlug}/{subCategorySlug}', '\App\Http\Controllers\AnnonceController@adsBySubCategory')->name('Annonce.adsBySubCategory');
-
 Route::get('/{currentDepartmentSlug}/{categorySlug}/{subCategorySlug}', '\App\Http\Controllers\AnnonceController@adsBySubCategory')->name('Annonce.adsBySubCategory');
-
 Route::get('/{currentDepartmentSlug}/{categorySlug}/{subCategorySlug}/{annonceSlug}', '\App\Http\Controllers\AnnonceController@show')->name('Annonce.show');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/ad/create', '\App\Http\Controllers\AnnonceController@create')->name('Annonce.create');
 Route::post('/ad/store', '\App\Http\Controllers\AnnonceController@store')->name('Annonce.store');
+
+Route::get('/search/{currentDepartmentSlug}/{search}', '\App\Http\Controllers\SearchController@index')->name('Search.index');

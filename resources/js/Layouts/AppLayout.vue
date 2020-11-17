@@ -28,7 +28,7 @@
 
                     <div class="flex flex-1 justify-end items-center">
                         <div class="w-2/3">
-                            <Search/>
+                            <SearchInput/>
                         </div>
                     </div>
 
@@ -272,7 +272,7 @@
     import JetDropdownLink from './../Jetstream/DropdownLink'
     import JetNavLink from './../Jetstream/NavLink'
     import JetResponsiveNavLink from './../Jetstream/ResponsiveNavLink'
-    import Search from './../Components/Search'
+    import SearchInput from '../Components/SearchInput'
 
     export default {
         components: {
@@ -282,7 +282,7 @@
             JetDropdownLink,
             JetNavLink,
             JetResponsiveNavLink,
-            Search
+            SearchInput
         },
 
         data() {

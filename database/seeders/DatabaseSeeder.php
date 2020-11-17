@@ -15,13 +15,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(UserSeeder::class);
+//        $this->call(UserSeeder::class);
+//
+//        $this->call(DepartmentSeeder::class);
+//        $this->call(CategorySeeder::class);
+//        $this->call(SubCategorySeeder::class);
 
-        $this->call(DepartmentSeeder::class);
-        $this->call(CategorySeeder::class);
-        $this->call(SubCategorySeeder::class);
+        Annonce::factory(30000)->create();
 
-//        Annonce::factory(30000)->create();
-        Annonce::factory(9800)->create();
+//            For prod, limit 10000 entries
+//        Annonce::factory(9800)->create();
     }
 }

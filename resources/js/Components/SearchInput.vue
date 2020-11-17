@@ -106,7 +106,7 @@
 
                 this.loading = true
 
-                axios.get(`/api/search/${this.search}`)
+                axios.get(`/api/search/${this.$store.state.departments.current_department.slug}/${this.search}`)
                     .then(response => {
                         console.log(response)
                         this.searchDepartments = response.data.departments

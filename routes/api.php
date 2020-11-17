@@ -18,4 +18,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/search/{search}','\App\Http\Controllers\SearchController@dropdownSearch')->name('search.dropdown');
+Route::get('/search/{currentDepartmentSlug}/{search}','\App\Http\Controllers\SearchController@dropdownSearch')->name('search.dropdown');

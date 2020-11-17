@@ -7,11 +7,11 @@
                 </h2>
                 <span class="font-bold mx-2">></span>
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    {{category.title}}
+                    Search
                 </h2>
                 <span class="font-bold mx-2">></span>
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    {{sub_category.title}}
+                    aaaa
                 </h2>
             </div>
         </template>
@@ -37,10 +37,8 @@
     import Pagination from "../../Components/Pagination";
 
     export default {
-        name: "AdList",
+        name: "Search",
         props: [
-            'category',
-            'sub_category',
             'annonces',
             'current'
         ],
@@ -57,11 +55,10 @@
         computed: {},
         methods: {
             changePage({pageNum, perPage}) {
-                this.$inertia.visit(this.route('Annonce.adsBySubCategory',
+                this.$inertia.visit(this.route('Search.index',
                     {
                         currentDepartmentSlug: this.current.slug,
-                        categorySlug: this.category.slug,
-                        subCategorySlug: this.sub_category.slug,
+                        search: 'te',
                         page: pageNum,
                         nb: perPage
                     },

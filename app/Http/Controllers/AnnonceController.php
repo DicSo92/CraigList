@@ -38,9 +38,9 @@ class AnnonceController extends Controller
         $category = $category->where('slug', $categorySlug)->first();
 
         if (!isset($nb))
-            $ads = $annonce->with('user')->where([['sub_category_id', $subCategory->id], ['department_id', $current_department->id]])->orderBy('created_at', 'DESC')->paginate(12);
+            $ads = $annonce->with('user')->where([['sub_category_id', $subCategory->id], ['department_id', $current_department->id]])->orderBy('created_at', 'DESC')->with(['subCategory.category', 'department'])->paginate(12);
         else
-            $ads = $annonce->with('user')->where([['sub_category_id', $subCategory->id], ['department_id', $current_department->id]])->orderBy('created_at', 'DESC')->paginate($nb);
+            $ads = $annonce->with('user')->where([['sub_category_id', $subCategory->id], ['department_id', $current_department->id]])->orderBy('created_at', 'DESC')->with(['subCategory.category', 'department'])->paginate($nb);
 
         return Inertia::render('AdList/Index', [
             "category" => $category,
