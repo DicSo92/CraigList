@@ -25,7 +25,11 @@
                         <div class="flex flex-col overflow-auto scrollStyle pl-5 mr-2">
                             <inertia-link v-for="subCategory in subCategories"
                                           :key="subCategory.id"
-                                          href="">
+                                          :href="route('Annonce.adsBySubCategory', {
+                                              currentDepartmentSlug: $store.state.departments.current_department.slug,
+                                              categorySlug: subCategory.category.slug,
+                                              subCategorySlug: subCategory.slug
+                                          })">
                                 <div class="hover:underline text-sm cursor-pointer">
                                     {{subCategory.title}}
                                 </div>
@@ -37,7 +41,8 @@
                         <div class="flex flex-col overflow-auto scrollStyle pl-5 mr-2">
                             <inertia-link v-for="department in departments"
                                           :key="department.id"
-                                          href="">
+                                          :href="route('home', {currentDepartmentSlug: department.slug})"
+                                          @click="changeCurrentDepartment(department)">
                                 <div class="hover:underline text-sm cursor-pointer">
                                     {{department.name}}
                                 </div>
@@ -108,7 +113,10 @@
                         preserveState: true
                     }
                 ))
-            }
+            },
+            changeCurrentDepartment(department) {
+                this.$store.commit('departments/changeCurrentDepartment', department)
+            },
         }
     }
 </script>
