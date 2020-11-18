@@ -1,8 +1,17 @@
 <template>
-    <div class="max-w-sm rounded overflow-hidden shadow-lg h-full flex flex-col">
-        <img class="w-full cursor-pointer" @click="goToProduct"
-             :src="annonce.images ? annonce.images[0] : 'https://icon-library.com/images/no-image-available-icon/no-image-available-icon-16.jpg'"
-             alt="Sunset in the mountains">
+    <div class="rounded overflow-hidden shadow-lg h-full flex flex-col w-full">
+        <inertia-link :href="route('Annonce.show', {
+                            currentDepartmentSlug: annonce.department.slug,
+                            categorySlug: annonce.sub_category.category.slug,
+                            subCategorySlug: annonce.sub_category.slug,
+                            annonceSlug: annonce.slug
+                        }, {
+                            preserveState: true
+                        })">
+            <img class="w-full cursor-pointer"
+                 :src="annonce.images ? annonce.images[0] : 'https://icon-library.com/images/no-image-available-icon/no-image-available-icon-16.jpg'"
+                 alt="Sunset in the mountains">
+        </inertia-link>
         <div class="px-5 py-4">
             <div class="flex">
                 <span class="float-left mr-1 -mt-1">
@@ -18,9 +27,17 @@
                     </svg>
                 </span>
 
-                <p class="font-bold mb-2 cursor-pointer" @click="goToProduct">
+                <inertia-link class="font-bold mb-2 cursor-pointer"
+                              :href="route('Annonce.show', {
+                                  currentDepartmentSlug: annonce.department.slug,
+                                  categorySlug: annonce.sub_category.category.slug,
+                                  subCategorySlug: annonce.sub_category.slug,
+                                  annonceSlug: annonce.slug
+                              }, {
+                                  preserveState: true
+                              })">
                     {{ annonce.title }}
-                </p>
+                </inertia-link>
 
             </div>
             <p class="text-gray-700 text-base ellipsis">
@@ -31,7 +48,7 @@
         <div class="flex-grow flex items-end">
             <div class='flex justify-between items-center text-gray-700 px-5 py-4 w-full'>
                 <div class="text-xs">May 6, 2020</div>
-                <div class="text-sm">Posted by <span class="text-red-400">{{ annonce.user.name }}</span></div>
+                <div class="text-sm text-right">Posted by <span class="text-red-400">{{ annonce.user.name }}</span></div>
             </div>
         </div>
     </div>
@@ -41,9 +58,6 @@
     export default {
         name: "Card",
         props: [
-            'category',
-            'subCategory',
-            'current',
             'annonce'
         ],
         data () {
@@ -52,19 +66,6 @@
             }
         },
         methods: {
-            goToProduct() {
-                this.$inertia.visit(this.route('Annonce.show',
-                    {
-                        currentDepartmentSlug: this.current.slug,
-                        categorySlug: this.category.slug,
-                        subCategorySlug: this.subCategory.slug,
-                        annonceSlug: this.annonce.slug
-                    },
-                    {
-                        preserveState: true
-                    }
-                ))
-            }
         }
     }
 </script>
