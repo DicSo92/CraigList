@@ -9,6 +9,20 @@ import PortalVue from 'portal-vue';
 import wysiwyg from "vue-wysiwyg";
 import VueLodash from 'vue-lodash'
 import lodash from 'lodash'
+import VueHtmlToPaper from 'vue-html-to-paper';
+
+
+Vue.use(VueHtmlToPaper, {
+    name: '_blank',
+    specs: [
+        'fullscreen=yes',
+        'titlebar=yes',
+        'scrollbars=yes'
+    ],
+    styles: [
+        'https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css',
+    ]
+});
 
 Vue.use(VueLodash, { lodash: lodash })
 
