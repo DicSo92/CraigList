@@ -37,19 +37,20 @@ class SearchController extends Controller
         ]);
     }
 
-    public function index(Request $request, Department $department, Annonce $annonce, $currentDepartmentSlug, $search)
+    public function index(Request $request, SubCategory $subCategory, Annonce $annonce, Department $department, $currentDepartmentSlug, $search)
     {
         $current_department = $department->where('slug', $currentDepartmentSlug)->firstOrFail();
 
-        $nb = $request->query('nb');
+        $nb = $request->query('nb') ? $request->query('nb') : 12;
 
-        if (!isset($nb))
-            $ads = $annonce->with(['subCategory.category', 'department', 'user'])->where([['title', 'like', '%' . $search . '%'], ['department_id', $current_department->id]])->orderBy('created_at', 'DESC')->paginate(12);
-        else
-            $ads = $annonce->with(['subCategory.category', 'department', 'user'])->where([['title', 'like', '%' . $search . '%'], ['department_id', $current_department->id]])->orderBy('created_at', 'DESC')->paginate($nb);
+        $ads = $annonce->with(['subCategory.category', 'department', 'user'])->where([['title', 'like', '%' . $search . '%'], ['department_id', $current_department->id]])->orderBy('created_at', 'DESC')->paginate($nb);
+        $subCategories = $subCategory->with('category')->where('title', 'like', '%' . $search . '%')->get();
+        $departments = $department->where('name', 'like', '%' . $search . '%')->get();;
 
         return Inertia::render('Search/Index', [
             "annonces" => $ads,
+            "subCategories" => $subCategories,
+            "departments" => $departments,
             "current" => $current_department,
             "search" => $search
         ]);

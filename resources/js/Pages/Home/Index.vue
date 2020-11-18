@@ -8,14 +8,14 @@
 
         <div class="container mx-auto flex justify-center py-4">
             <div class="w-full grid grid-cols-12 gap-4">
-                <div class="col-span-3 bg-gray-200 p-3 borderX">
+                <div class="col-span-3 bg-gray-200 p-3 borderX rounded">
                     <MainLeft></MainLeft>
                 </div>
 
                 <div class="col-span-7">
                     <MainMiddle :categories="categories" :current="current"></MainMiddle>
                 </div>
-                <div class="col-span-2 bg-gray-200 p-3 borderX">
+                <div class="col-span-2 bg-gray-200 p-3 borderX rounded">
                     <MainRight :departments="departments"></MainRight>
                 </div>
             </div>

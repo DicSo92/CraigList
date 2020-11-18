@@ -1,6 +1,6 @@
 <template>
     <div id="MainMiddle">
-        <h3 class="font-bold text-2xl py-2 borderY bg-gray-200 w-full text-center">
+        <h3 class="font-bold text-2xl py-2 borderY bg-gray-200 w-full text-center rounded">
             {{ current.name }} ({{ current.code }})
         </h3>
 

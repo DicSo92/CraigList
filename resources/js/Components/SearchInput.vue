@@ -57,9 +57,14 @@
             <div class="flex justify-between mt-2 px-3 bg-gray-200 items-center"
                  v-if="searchCategories && searchCategories.total">
                 <h3 class="">Categories :</h3>
-                <h3 class="text-sm font-bold underline hover:text-black cursor-pointer" v-if="searchCategories.total > 10">
+                <inertia-link class="text-sm font-bold underline hover:text-black cursor-pointer"
+                              v-if="searchCategories.total > 10"
+                              :href="route('Search.index', {
+                                  currentDepartmentSlug: this.$store.state.departments.current_department.slug,
+                                  search: this.search
+                              })">
                     See more({{searchCategories.total}})
-                </h3>
+                </inertia-link>
             </div>
             <div class="flex flex-col items-start">
                 <inertia-link class="ml-5 cursor-pointer hover:text-black"
@@ -77,9 +82,14 @@
             <div class="flex justify-between mt-2 px-3 bg-gray-200 items-center"
                  v-if="searchDepartments && searchDepartments.total">
                 <h3 class="">Departments :</h3>
-                <h3 class="text-sm font-bold underline hover:text-black cursor-pointer" v-if="searchDepartments.total > 10">
+                <inertia-link class="text-sm font-bold underline hover:text-black cursor-pointer"
+                              v-if="searchDepartments.total > 10"
+                              :href="route('Search.index', {
+                                  currentDepartmentSlug: this.$store.state.departments.current_department.slug,
+                                  search: this.search
+                              })">
                     See more({{searchDepartments.total}})
-                </h3>
+                </inertia-link>
             </div>
             <div class="flex flex-col items-start">
                 <inertia-link class="ml-5 cursor-pointer hover:text-black" v-for="department in searchDepartments.data"
