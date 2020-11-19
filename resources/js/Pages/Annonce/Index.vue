@@ -74,6 +74,36 @@
                 </div>
             </div>
 
+            <div class="border-b mt-4"></div>
+            <div class="grid grid-cols-6 gap-6 w-1/2 mt-3">
+                <div class="col-span-6">
+                    <jet-label for="object" value="Object"/>
+                    <jet-input id="object" type="text" class="mt-1 block w-full" v-model="object"
+                               autocomplete="Object"
+                               placeholder="Object..."/>
+                </div>
+                <div class="col-span-6">
+                    <jet-label for="mail" value="Mail"/>
+                    <textarea id="mail" class="form-input rounded-md shadow-sm mt-1 block w-full" v-model="mailContent"
+                               autocomplete="Mail" rows="5"
+                               placeholder="Please type here..."/>
+                </div>
+                <div class="col-span-6 flex justify-between items-end">
+                    <div class="">
+                        <jet-label for="eee" value="Mail"/>
+                        <jet-input id="eee" type="text" class="mt-1 block" v-model="mailContent"
+                                   placeholder="12 €/h"
+                                   autocomplete="price"/>
+                    </div>
+                    <div class="flex items-center justify-end text-right">
+                        <jet-button :class="{ 'opacity-25': submitBtnDisable }" :disabled="submitBtnDisable">
+                            Submit
+                        </jet-button>
+                    </div>
+                </div>
+
+            </div>
+
             <div class="flex-col mt-4" v-if="showQrCode">
                 <div class="border-b mb-3"></div>
                 <div class="flex justify-end">
@@ -88,6 +118,9 @@
     import AppLayout from './../../Layouts/AppLayout'
     import Carousel from './Carousel'
     import QrcodeVue from 'qrcode.vue'
+    import JetInput from "../../Jetstream/Input";
+    import JetLabel from "../../Jetstream/Label";
+    import JetButton from './../../Jetstream/Button'
 
     export default {
         name: 'Annonce',
@@ -98,13 +131,20 @@
         components: {
             AppLayout,
             Carousel,
-            QrcodeVue
+            QrcodeVue,
+            JetInput,
+            JetLabel,
+            JetButton
         },
         data() {
             return {
                 value: window.location.href,
                 showQrCode: false,
-                showBtn: true
+                showBtn: true,
+
+                object: '',
+                mailContent: '',
+                submitBtnDisable: false
             }
         },
         created() {
