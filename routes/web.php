@@ -24,6 +24,8 @@ Route::group(['auth:sanctum', 'verified'], function () {
     })->name('dashboard');
 
     Route::get('/ad/create', '\App\Http\Controllers\AnnonceController@create')->name('Annonce.create');
+
+    Route::post('/annonce/favorite','\App\Http\Controllers\AnnonceController@toggleFavorite')->name('annonce.toggleFavorite');
 });
 
 
