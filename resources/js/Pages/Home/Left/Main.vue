@@ -16,7 +16,7 @@
 
         <div class="hover:underline cursor-pointer font-bold mb-5">Mon Compte</div>
 
-        <Search></Search>
+        <SearchInput></SearchInput>
 
         <Calendar></Calendar>
 
@@ -25,14 +25,14 @@
 </template>
 
 <script>
-    import Search from "./Search";
+    import SearchInput from "../../../Components/SearchInput";
     import Links from "./Links";
     import Calendar from "./Calendar";
 
     export default {
         name: "MainLeft",
         components: {
-            Search,
+            SearchInput,
             Calendar,
             Links,
         },

@@ -7,31 +7,27 @@
                 </h2>
                 <span class="font-bold mx-2">></span>
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    {{category.slug}}
+                    {{category.title}}
                 </h2>
                 <span class="font-bold mx-2">></span>
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    {{sub_category.slug}}
+                    {{sub_category.title}}
                 </h2>
             </div>
         </template>
 
         <div class="container mx-auto flex flex-col items-center justify-center py-4">
-            <div class="mb-4 w-full flex justify-end">
-                <Pagination :annonces="annonces"
-                            :category="category"
-                            :subCategory="sub_category"
-                            :current="current">
-                </Pagination>
+            <div class="mb-4 w-full flex justify-end" v-if="annonces.total">
+                <Pagination :annonces="annonces" @changePage="changePage" />
             </div>
-            <div class="w-full grid grid-cols-12 gap-4">
-                <div class="col-span-3"
+            <h3 class="text-gray-300 text-5xl font-bold" v-if="!annonces.total">
+                No Results
+            </h3>
+            <div class="w-full grid grid-cols-12 gap-4" v-else>
+                <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3"
                      v-for="annonce in annonces.data"
                      :key="annonce.id">
-                    <Card :annonce="annonce"
-                          :current="current"
-                          :subCategory="sub_category"
-                          :category="category"></Card>
+                    <Card :annonce="annonce"/>
                 </div>
             </div>
         </div>
@@ -40,8 +36,8 @@
 
 <script>
     import AppLayout from "../../Layouts/AppLayout";
-    import Card from "./Card";
-    import Pagination from "./Pagination";
+    import Card from "../../Components/Card";
+    import Pagination from "../../Components/Pagination";
 
     export default {
         name: "AdList",
@@ -63,6 +59,20 @@
         },
         computed: {},
         methods: {
+            changePage({pageNum, perPage}) {
+                this.$inertia.visit(this.route('Annonce.adsBySubCategory',
+                    {
+                        currentDepartmentSlug: this.current.slug,
+                        categorySlug: this.category.slug,
+                        subCategorySlug: this.sub_category.slug,
+                        page: pageNum,
+                        nb: perPage
+                    },
+                    {
+                        preserveState: true
+                    }
+                ))
+            }
         }
     }
 </script>

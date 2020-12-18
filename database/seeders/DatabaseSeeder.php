@@ -21,7 +21,9 @@ class DatabaseSeeder extends Seeder
         $this->call(CategorySeeder::class);
         $this->call(SubCategorySeeder::class);
 
-//        Annonce::factory(30000)->create();
-        Annonce::factory(9800)->create();
+        Annonce::factory(30000)->create();
+
+//            For prod, limit 10000 entries
+//        Annonce::factory(9800)->create();
     }
 }

@@ -1,6 +1,6 @@
 <template>
     <div id="Category">
-        <h5 class="font-bold text-lg borderY bg-gray-200 w-full text-center mt-3 mb-2">{{ category.title }}</h5>
+        <h5 class="font-bold text-lg borderY rounded bg-gray-200 w-full text-center mt-3 mb-2">{{ category.title }}</h5>
         <div class="grid grid-cols-6 gap-3">
             <div v-for="part in spliceSubCategories(category).sub_categories"
                  :class="'col-span-' + spliceSubCategories(category).sizeCol" >

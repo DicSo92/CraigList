@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Annonce;
 use App\Models\Category;
 use App\Models\Department;
+use App\Models\Favorite;
 use App\Models\SubCategory;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -33,14 +35,11 @@ class AnnonceController extends Controller
     {
         $current_department = $department->where('slug', $currentDepartmentSlug)->firstOrFail();
 
-        $nb = $request->query('nb');
+        $nb = $request->query('nb') ? $request->query('nb') : 12;
         $subCategory = $subCategory->where('slug', $subCategorySlug)->first();
         $category = $category->where('slug', $categorySlug)->first();
 
-        if (!isset($nb))
-            $ads = $annonce->with('user')->where([['sub_category_id', $subCategory->id], ['department_id', $current_department->id]])->orderBy('created_at', 'DESC')->paginate(12);
-        else
-            $ads = $annonce->with('user')->where([['sub_category_id', $subCategory->id], ['department_id', $current_department->id]])->orderBy('created_at', 'DESC')->paginate($nb);
+        $ads = $annonce->with(['subCategory.category', 'department', 'user'])->where([['sub_category_id', $subCategory->id], ['department_id', $current_department->id]])->orderBy('created_at', 'DESC')->paginate($nb);
 
         return Inertia::render('AdList/Index', [
             "category" => $category,
@@ -103,7 +102,7 @@ class AnnonceController extends Controller
 
         $imagesArray = array();
         $cloudinary_upload = null;
-        foreach($request->images as $image) {
+        foreach ($request->images as $image) {
             Cloudder::upload($image->getRealPath(), null, array("folder" => env('CLOUDINARY_MAIN_FOLDER')));
             $cloudinary_upload = Cloudder::getResult();
             array_push($imagesArray, $cloudinary_upload['url']);
@@ -114,9 +113,9 @@ class AnnonceController extends Controller
         $annonce->slug = $slug;
         $annonce->description = $request->get('description');
         $annonce->price = $request->get('price');
-        $annonce->department_id =  $request->get('departmentId');
-        $annonce->sub_category_id =  $request->get('subCategoryId');
-        $annonce->user_id =  Auth::id();
+        $annonce->department_id = $request->get('departmentId');
+        $annonce->sub_category_id = $request->get('subCategoryId');
+        $annonce->user_id = Auth::id();
 
         if (!empty($imagesArray)) {
             $annonce->images = $imagesArray;
@@ -157,7 +156,8 @@ class AnnonceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Annonce  $annonce
+     * @param \App\Models\Annonce $annonce
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Annonce $annonce)
@@ -168,8 +168,9 @@ class AnnonceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Annonce  $annonce
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Annonce      $annonce
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Annonce $annonce)
@@ -180,11 +181,54 @@ class AnnonceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Annonce  $annonce
+     * @param \App\Models\Annonce $annonce
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Annonce $annonce)
     {
         //
+    }
+
+
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Favorite     $favorite
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function toggleFavorite(Request $request, Favorite $favorite)
+    {
+        $request->validate([
+            'annonceId' => 'required|exists:annonces,id',
+        ]);
+
+        if (!Auth::check())
+//            return response()->json(["error" => true, "message" => "Unauthorized", 'user' => Auth::user()], 401);
+            return back()->with([
+                'message' => 'Unauthorized.'
+            ]);
+
+        $fav = $favorite->where([['annonce_id', $request->annonceId], ['user_id', Auth::id()]])->first();
+        if ($fav) {
+            $fav->delete();
+            return back()->with([
+                'message' => 'Deleted',
+                "fav" => $fav
+            ]);
+        } else {
+            $favo = new Favorite;
+            $favo->user_id = Auth::id();
+            $favo->annonce_id = $request->annonceId;
+            $favo->save();
+
+            return back()->with([
+                'message' => 'Deleted',
+                "fav" => $favo
+            ]);
+        }
     }
 }
